@@ -1,4 +1,5 @@
 //object literal
+
 let bob = {
   fname: "bob",
   lname: "smith",
@@ -61,17 +62,42 @@ for(let trans of student.transcript)
 }
 
 function getAssignmentMark(student, course, num){
+
   for(let trans of student.transcript){
      if(trans.course === course){
-      for(let grade of student.transcript)
-        if(trans.grades.num === num){
-          return trans.grades.num;
+
+      for(let i = 0; i < trans.grades.length; i++)
+        if(i+1 === num){
+          return trans.grades[i];
         }
+
       }
     }
      return -1;
 }
 
+function averageAssessment(students, courseName, assignment){
+  let sum = 0, num = 0;
+
+  for(let student of students){
+
+    for(let trans of student.transcript){
+      if(trans.course === courseName){
+        num++;
+
+          for(let i = 0; i < trans.grades.length; i++){
+            if(i+1 === assignment){
+              sum+=trans.grades[i];
+            }
+          }
+        }
+      }
+    }
+    return sum/num;
+  }
+
 console.log(getAverageGrade(bob, 'INFO 1603'));
 
-console.log(getAssignmentMark(sally, 'INFO 1601', ));
+console.log(getAssignmentMark(bob, 'INFO 1603', 2));
+
+console.log(averageAssessment(students, 'INFO 1601', 1));
